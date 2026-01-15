@@ -1,13 +1,660 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Site</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>DroidXMRMiner - Minería Monero Profesional</title>
+    <meta
+        content="DroidXMRMiner es una aplicación premium de minería Monero para Android. Rendimiento nativo, gestión inteligente de energía y centrada en la privacidad."
+        name="description" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#5E42A6", // App Purple
+                        "primary-hover": "#4A328C",
+                        "background-light": "#F3F4F6",
+                        "background-dark": "#312450", // App Background
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#3C2F59", // App Box
+                        "surface-darker": "#261D3D",
+                        "accent-dark": "#4A328C",
+                        secondary: "#03DAC6", // App Secondary/Teal
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                        mono: ["JetBrains Mono", "monospace"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                        'hero-glow': 'conic-gradient(from 180deg at 50% 50%, #5E42A6 0deg, #03DAC6 180deg, #5E42A6 360deg)',
+                    }
+                },
+            },
+        };
+    </script>
+    <link href="css/styles.css" rel="stylesheet" />
 </head>
-<body>
-    <h1>Welcome to Site</h1>
-    <p>This is a basic HTML page.</p>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 font-sans transition-colors duration-300 antialiased selection:bg-primary selection:text-white">
+    <nav
+        class="fixed w-full z-50 top-0 transition-all duration-300 bg-surface-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-gray-200 dark:border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer">
+                    <img src="logo.webp" alt="DroidXMRMiner Logo"
+                        class="w-10 h-10 rounded-xl shadow-lg shadow-primary/20" />
+                    <span class="font-bold text-xl tracking-tight">Droid<span
+                            class="text-primary">XMR</span>Miner</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a class="hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium"
+                            href="#features" data-i18n="nav_features">Features</a>
+                        <a class="hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium"
+                            href="#performance" data-i18n="nav_performance">Performance</a>
+                        <a class="hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium"
+                            href="#faq" data-i18n="nav_faq">FAQ</a>
+                        <a class="hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center gap-1"
+                            href="https://github.com/monero-project/monero" target="_blank">
+                            GitHub <span class="material-icons-round text-xs">open_in_new</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <!-- Language Selector -->
+                    <div class="relative" id="lang-selector">
+                        <button
+                            class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-white/10 transition-colors focus:outline-none flex items-center gap-1 text-sm font-medium"
+                            id="lang-toggle">
+                            <span id="current-lang-flag">🇬🇧</span>
+                            <span class="material-icons-round text-sm text-gray-500">expand_more</span>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-32 bg-white dark:bg-surface-dark rounded-lg shadow-xl border border-gray-200 dark:border-white/10 overflow-hidden hidden"
+                            id="lang-menu">
+                            <button
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-white/10 flex items-center gap-2"
+                                data-lang="en">
+                                🇬🇧 English
+                            </button>
+                            <button
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-white/10 flex items-center gap-2"
+                                data-lang="es">
+                                🇪🇸 Español
+                            </button>
+                            <button
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-white/10 flex items-center gap-2"
+                                data-lang="fr">
+                                🇫🇷 Français
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Theme Toggle -->
+                    <button
+                        class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-white/10 transition-colors focus:outline-none"
+                        id="theme-toggle">
+                        <span class="material-icons-round dark:hidden text-gray-600">dark_mode</span>
+                        <span class="material-icons-round hidden dark:block text-yellow-400">light_mode</span>
+                    </button>
+                    <a class="hidden sm:flex bg-primary hover:bg-primary-hover text-white px-5 py-2 rounded-full text-sm font-semibold transition-all shadow-lg shadow-primary/25 hover:shadow-primary/40"
+                        href="#download" data-i18n="nav_download">
+                        Download App
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="relative pt-32 pb-20 sm:pt-40 sm:pb-24 overflow-hidden">
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-primary/10 dark:bg-primary/5 blur-[120px] rounded-full pointer-events-none -z-10">
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider mb-6">
+                <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                <span data-i18n="hero_badge"></span>v1.6.0 Stable Release</span>
+            </div>
+            <h1 class="text-5xl sm:text-7xl font-bold tracking-tight mb-6 leading-tight">
+                Droid<span class="text-primary">XMR</span>Miner: <br class="hidden sm:block" />
+                <span class="animated-gradient-text" data-i18n="hero_title_suffix">Native Monero Mining</span>
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-600 dark:text-gray-400" data-i18n="hero_subtitle">
+                The most advanced technical tool for XMR enthusiasts on Android.
+                Optimized performance, total privacy and Android 15 compatible.
+            </p>
+            <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+                <a class="flex items-center justify-center gap-3 px-8 py-4 bg-primary text-white rounded-xl font-semibold text-lg transition-transform hover:scale-105 shadow-xl shadow-primary/20"
+                    href="https://play.google.com/store/apps/details?id=es.chichicha.minador">
+                    <span class="material-icons-round">shop</span>
+                    <span data-i18n="hero_cta_play">Google Play</span>
+                </a>
+                <a class="flex items-center justify-center gap-3 px-8 py-4 bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white rounded-xl font-semibold text-lg transition-all hover:bg-gray-50 dark:hover:bg-accent-dark"
+                    href="https://github.com/droidxmrminer">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path clip-rule="evenodd"
+                            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                            fill-rule="evenodd"></path>
+                    </svg>
+                    <span data-i18n="hero_cta_github">View on GitHub</span>
+                </a>
+            </div>
+            <div class="mt-16 relative mx-auto max-w-4xl">
+                <div
+                    class="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-2xl blur opacity-20 dark:opacity-40">
+                </div>
+                <div
+                    class="relative bg-surface-light dark:bg-surface-darker rounded-xl border border-gray-200 dark:border-white/10 shadow-2xl overflow-hidden">
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200 dark:divide-white/10">
+                        <div class="p-6 flex flex-col items-center text-center">
+                            <span class="material-icons-round text-3xl text-primary mb-2">memory</span>
+                            <span class="text-lg font-bold text-gray-900 dark:text-white" data-i18n="feat_native">Native
+                                XMRig Engine</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 mt-1"
+                                data-i18n="feat_native_desc">Optimized ARM64 binary</span>
+                        </div>
+                        <div class="p-6 flex flex-col items-center text-center">
+                            <span class="material-icons-round text-3xl text-primary mb-2">verified</span>
+                            <span class="text-lg font-bold text-gray-900 dark:text-white"
+                                data-i18n="feat_android15">Android 15 Compatible</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 mt-1"
+                                data-i18n="feat_android15_desc">16KB alignment included</span>
+                        </div>
+                        <div class="p-6 flex flex-col items-center text-center">
+                            <span class="material-icons-round text-3xl text-primary mb-2">thermostat</span>
+                            <span class="text-lg font-bold text-gray-900 dark:text-white"
+                                data-i18n="feat_thermal">Thermal Protection</span>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 mt-1"
+                                data-i18n="feat_thermal_desc">Configurable auto-pause</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="py-20 bg-gray-50 dark:bg-[#151515] border-y border-gray-200 dark:border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:flex lg:items-center lg:justify-between lg:gap-16">
+                <div class="lg:w-1/2 mb-10 lg:mb-0">
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-secondary text-xs font-semibold uppercase tracking-wider mb-6">
+                        <span class="material-icons-round text-sm">shield</span> <span
+                            data-i18n="section_protection_badge">Designed to Last</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6"
+                        data-i18n="section_protection_title">
+                        Protects Your Device While Mining
+                    </h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 mb-8 leading-relaxed"
+                        data-i18n="section_protection_desc">
+                        DroidXMRMiner is not just a miner, it's a tool designed to work sustainably.
+                        Includes automatic protections so you can leave your device running without worrying about
+                        hardware.
+                    </p>
+                    <div class="space-y-5">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                                <span class="material-icons-round">thermostat</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 dark:text-white" data-i18n="prot_thermal">Smart
+                                    Thermal Control</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400" data-i18n="prot_thermal_desc">
+                                    Auto-pause when device reaches high temperatures. Configurable to your preferences.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                                <span class="material-icons-round">battery_charging_full</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 dark:text-white" data-i18n="prot_battery">Battery
+                                    Management</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400" data-i18n="prot_battery_desc">Option
+                                    to mine only when plugged in to protect battery lifespan.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary flex-shrink-0">
+                                <span class="material-icons-round">visibility_off</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 dark:text-white" data-i18n="prot_privacy">Privacy
+                                    by Design</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400" data-i18n="prot_privacy_desc">No
+                                    storage permissions, no file access. It does only what it should: mine.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 relative">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-secondary/20 rounded-3xl blur-2xl transform rotate-3">
+                    </div>
+                    <div
+                        class="relative bg-white dark:bg-surface-dark p-8 rounded-3xl border border-gray-100 dark:border-white/5 shadow-xl">
+                        <div class="text-center mb-6">
+                            <span class="material-icons-round text-6xl text-primary mb-4">verified</span>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2" data-i18n="req_title">What
+                                Do You Need?</h3>
+                            <p class="text-sm text-gray-500 dark:text-gray-400" data-i18n="req_subtitle">Minimum
+                                requirements to get started.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="p-4 bg-gray-50 dark:bg-surface-darker rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-icons-round text-secondary">android</span>
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                                        data-i18n="req_android">Android 9.0 or higher</span>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-gray-50 dark:bg-surface-darker rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-icons-round text-secondary">memory</span>
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                                        data-i18n="req_arm">ARM64 processor (64-bit)</span>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-gray-50 dark:bg-surface-darker rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-icons-round text-secondary">dns</span>
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                                        data-i18n="req_ram">2GB RAM recommended</span>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-gray-50 dark:bg-surface-darker rounded-xl">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-icons-round text-secondary">wallet</span>
+                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                                        data-i18n="req_wallet">A Monero (XMR) wallet</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="py-24 bg-white dark:bg-surface-dark relative" id="features">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-base text-primary font-semibold tracking-wide uppercase" data-i18n="features_badge">
+                    Features</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl"
+                    data-i18n="features_title">
+                    Engineering for Mobile Mining
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 dark:text-gray-400 mx-auto"
+                    data-i18n="features_subtitle">
+                    We removed the unnecessary and optimized the mining engine for ARM architecture.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="glass-card p-8 rounded-2xl hover:border-primary/50 transition-colors group">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
+                        <span class="material-icons-round text-2xl">bolt</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3" data-i18n="feat_card_native">Native
+                        Engine</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-sm"
+                        data-i18n="feat_card_native_desc">
+                        Direct XMRig execution for maximum efficiency and performance on ARM64 architecture.
+                    </p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl hover:border-primary/50 transition-colors group">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
+                        <span class="material-icons-round text-2xl">psychology</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3" data-i18n="feat_card_android15">
+                        Android 15 Ready</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-sm"
+                        data-i18n="feat_card_android15_desc">
+                        Full compliance with new 16KB memory alignment standards.
+                    </p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl hover:border-primary/50 transition-colors group">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary overflow-hidden">
+                        <span class="material-icons-round text-2xl">api</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3" data-i18n="feat_card_api">HTTP API
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-sm" data-i18n="feat_card_api_desc">
+                        Precise real-time statistics by directly querying the internal mining engine.
+                    </p>
+                </div>
+                <div class="glass-card p-8 rounded-2xl hover:border-primary/50 transition-colors group">
+                    <div
+                        class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors text-primary">
+                        <span class="material-icons-round text-2xl">security</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3" data-i18n="feat_card_privacy">Total
+                        Privacy</h3>
+                    <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-sm"
+                        data-i18n="feat_card_privacy_desc">
+                        Zero storage or file permissions. The miner only does what it should: mine.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="py-24 bg-background-light dark:bg-background-dark overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                <div class="mb-12 lg:mb-0">
+                    <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                        Control Total Sobre Tu Rig
+                    </h2>
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div
+                                class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                                <span class="material-icons-round">tune</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Ajuste de Precisión</h4>
+                                <p class="text-gray-600 dark:text-gray-400 mt-1">Configura hilos de CPU exactos. Deja
+                                    que la app recomiende ajustes basados en tu SoC.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div
+                                class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                                <span class="material-icons-round">history</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Datos Históricos</h4>
+                                <p class="text-gray-600 dark:text-gray-400 mt-1">Rastrea caídas de rendimiento o eventos
+                                    térmicos con nuestro gráfico detallado.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div
+                                class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                                <span class="material-icons-round">account_balance_wallet</span>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Integración de Wallet
+                                </h4>
+                                <p class="text-gray-600 dark:text-gray-400 mt-1">Pega fácilmente tu dirección Monero.
+                                    Validamos el formato al instante.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div
+                        class="absolute -top-10 -right-10 w-72 h-72 bg-primary/20 rounded-full blur-[60px] pointer-events-none">
+                    </div>
+                    <div
+                        class="relative rounded-[3rem] bg-[#1a1a1a] border-[12px] border-[#333] shadow-2xl overflow-hidden max-w-[320px] mx-auto transform rotate-[-2deg] hover:rotate-0 transition-all duration-500 cursor-pointer">
+                        <!-- Botones laterales decorativos -->
+                        <div class="absolute right-[-14px] top-24 w-1 h-12 bg-gray-800 rounded-l-md"></div>
+                        <div class="absolute right-[-14px] top-40 w-1 h-20 bg-gray-800 rounded-l-md"></div>
+
+                        <!-- Status Bar -->
+                        <div class="bg-primary px-5 py-2 flex items-center justify-between text-[10px] text-white/80">
+                            <span>19:10</span>
+                            <div class="flex items-center gap-1">
+                                <span class="material-icons-round text-[12px]">wifi</span>
+                                <span class="material-icons-round text-[12px]">signal_cellular_4_bar</span>
+                                <span class="material-icons-round text-[12px]">battery_full</span>
+                            </div>
+                        </div>
+
+                        <!-- Content (Fragment Miner) -->
+                        <div class="bg-[#312450] h-[520px] overflow-y-auto p-4 flex flex-col gap-4">
+                            <!-- Status Card -->
+                            <div class="bg-[#3C2F59] rounded-xl p-4 shadow-lg border border-white/5">
+                                <div class="flex items-center gap-4 mb-4">
+                                    <div
+                                        class="w-14 h-14 rounded-full bg-secondary/20 flex items-center justify-center">
+                                        <span class="material-icons-round text-secondary text-3xl">play_arrow</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <div class="text-white font-bold text-lg">Running</div>
+                                        <div class="text-white/60 text-xs italic">Session: 03:13:42</div>
+                                    </div>
+                                </div>
+                                <div class="w-full h-px bg-white/10 mb-4"></div>
+                                <button
+                                    class="w-full bg-white text-primary font-bold py-3 rounded-lg text-sm shadow-md uppercase active:scale-95 transition-transform">
+                                    Stop Mining
+                                </button>
+                            </div>
+
+                            <!-- Performance Card -->
+                            <div class="bg-[#3C2F59] rounded-xl p-4 shadow-lg border border-white/5">
+                                <div class="text-white/80 text-[10px] font-bold mb-3 uppercase tracking-widest">
+                                    Performance Chart</div>
+                                <div class="relative h-28 w-full bg-[#261D3D] rounded-lg overflow-hidden p-2">
+                                    <svg class="w-full h-full stroke-secondary fill-none stroke-2"
+                                        preserveAspectRatio="none" viewBox="0 0 100 50">
+                                        <path d="M0,45 Q10,40 20,42 T40,30 T60,35 T80,15 T100,25"></path>
+                                    </svg>
+                                    <div
+                                        class="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-secondary/10 to-transparent">
+                                    </div>
+                                </div>
+                                <div class="flex justify-between mt-3 text-[9px] text-white/50">
+                                    <span>Current: 438 H/s</span>
+                                    <span>Avg: 432 H/s</span>
+                                    <span>Max: 451 H/s</span>
+                                </div>
+                            </div>
+
+                            <!-- Statistics Card -->
+                            <div class="bg-[#3C2F59] rounded-xl p-4 shadow-lg border border-white/5">
+                                <div class="text-white/80 text-[10px] font-bold mb-3 uppercase tracking-widest">
+                                    Statistics</div>
+                                <div class="flex justify-between mb-2">
+                                    <div class="flex items-center gap-1 text-[#4CAF50] text-[10px] font-bold">
+                                        <span class="material-icons-round text-sm">check_circle</span> 132 shares
+                                    </div>
+                                    <div class="flex items-center gap-1 text-white/40 text-[10px]">
+                                        <span class="material-icons-round text-sm">error</span> 0 rejected
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="flex-1 h-1.5 bg-[#261D3D] rounded-full overflow-hidden">
+                                        <div class="bg-secondary h-full w-[100%]"></div>
+                                    </div>
+                                    <span class="text-white/60 text-[10px]">100%</span>
+                                </div>
+                                <div class="mt-4 flex justify-between items-center text-[10px] text-white/50">
+                                    <div class="flex items-center gap-1">
+                                        <span class="material-icons-round text-[12px]">battery_std</span> 85%
+                                    </div>
+                                    <div class="text-secondary font-bold">~0.000042 XMR/day</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="py-24 bg-white dark:bg-surface-darker" id="faq">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12" data-i18n="faq_title">
+                Frequently Asked Questions</h2>
+            <div class="space-y-4">
+                <div
+                    class="border border-gray-200 dark:border-gray-800 rounded-lg bg-gray-50 dark:bg-surface-dark overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none">
+                        <span class="font-medium text-gray-900 dark:text-white" data-i18n="faq_q1">What do I need to get
+                            started?</span>
+                        <span class="material-icons-round text-gray-500">expand_more</span>
+                    </button>
+                    <div class="px-6 pb-4 text-gray-600 dark:text-gray-400 text-sm" data-i18n="faq_a1">
+                        Any device with Android 9.0 or higher, 64-bit processor (ARM64), and at least 2GB of RAM
+                        recommended.
+                    </div>
+                </div>
+                <div
+                    class="border border-gray-200 dark:border-gray-800 rounded-lg bg-gray-50 dark:bg-surface-dark overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none">
+                        <span class="font-medium text-gray-900 dark:text-white" data-i18n="faq_q2">Is it safe for my
+                            hardware?</span>
+                        <span class="material-icons-round text-gray-500">expand_more</span>
+                    </button>
+                    <div class="px-6 pb-4 text-gray-600 dark:text-gray-400 text-sm" data-i18n="faq_a2">
+                        Yes. DroidXMRMiner includes configurable thermal protections and auto-pause if the device
+                        overheats or disconnects from power.
+                    </div>
+                </div>
+                <div
+                    class="border border-gray-200 dark:border-gray-800 rounded-lg bg-gray-50 dark:bg-surface-dark overflow-hidden">
+                    <button class="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none">
+                        <span class="font-medium text-gray-900 dark:text-white" data-i18n="faq_q3">How do I get
+                            support?</span>
+                        <span class="material-icons-round text-gray-500">expand_more</span>
+                    </button>
+                    <div class="px-6 pb-4 text-gray-600 dark:text-gray-400 text-sm" data-i18n="faq_a3">
+                        Technical support is handled quickly directly from the app by pressing the 'Get Help' button in
+                        the settings section.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-background-light dark:bg-background-dark py-20" id="download">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+                class="bg-primary rounded-3xl p-8 sm:p-16 text-center relative overflow-hidden shadow-2xl shadow-primary/30">
+                <div
+                    class="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/10 rounded-full blur-3xl">
+                </div>
+                <div
+                    class="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 w-64 h-64 bg-black/10 rounded-full blur-3xl">
+                </div>
+                <div class="relative z-10">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6" data-i18n="download_title">Ready to start
+                        mining?</h2>
+                    <p class="text-white/90 text-lg mb-10 max-w-2xl mx-auto" data-i18n="download_subtitle">
+                        Join the Monero network with the most efficient tool for Android. Download DroidXMRMiner now.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="https://play.google.com/store/apps/details?id=es.chichicha.minador"
+                            class="bg-white text-primary px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg flex items-center justify-center gap-2">
+                            <span class="material-icons-round">shop</span> <span data-i18n="download_play">Download on
+                                Google Play</span>
+                        </a>
+                        <a href="https://github.com/droidxmrminer/releases"
+                            class="bg-black/20 text-white border border-white/30 px-8 py-4 rounded-xl font-bold text-lg hover:bg-black/30 transition-colors backdrop-blur-sm flex items-center justify-center gap-2">
+                            <span class="material-icons-round">description</span> <span
+                                data-i18n="download_github">GitHub Releases</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white dark:bg-surface-darker pt-16 pb-8 border-t border-gray-200 dark:border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div
+                class="bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-700/30 rounded-xl p-6">
+                <div class="flex gap-4">
+                    <div class="flex-shrink-0">
+                        <span class="material-icons-round text-yellow-600 dark:text-yellow-500">warning</span>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-bold text-yellow-800 dark:text-yellow-500 mb-2">Legal &amp; Responsible
+                            Mining (Aviso Importante)</h4>
+                        <p class="text-sm text-yellow-700 dark:text-yellow-600/80 mb-2">
+                            El uso de esta aplicación para minar criptomonedas en dispositivos que no son de tu
+                            propiedad o sin el consentimiento explícito del propietario es ilegal y puede tener
+                            consecuencias legales graves.
+                        </p>
+                        <p class="text-sm text-yellow-700 dark:text-yellow-600/80">
+                            DroidXMRMiner está diseñado exclusivamente para uso educativo, pruebas de seguridad y
+                            gestión de dispositivos personales. Los desarrolladores no se hacen responsables del mal uso
+                            de esta herramienta. Al descargar, aceptas usar el software de manera ética y legal.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-white dark:bg-surface-darker border-t border-gray-200 dark:border-white/5 pt-8 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <img src="logo.webp" alt="DroidXMRMiner Logo"
+                            class="w-8 h-8 rounded-lg shadow-lg shadow-primary/20" />
+                        <span class="font-bold text-lg text-gray-900 dark:text-white">DroidXMRMiner</span>
+                    </div>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm leading-relaxed max-w-xs">
+                        Empoderando la descentralización un dispositivo móvil a la vez. El minero de código abierto más
+                        confiable para el ecosistema Android.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white mb-4">Recursos</h4>
+                    <ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+                        <li><a class="hover:text-primary transition-colors" href="#">Documentación</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Tutorial de Minería</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Lista de Pools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-gray-900 dark:text-white mb-4">Comunidad y Soporte</h4>
+                    <ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
+                        <li><a class="hover:text-primary transition-colors"
+                                href="https://github.com/droidxmrminer">GitHub
+                                @pablotoledo</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#">Guía de Inicio</a></li>
+                        <li><span class="text-xs italic text-gray-400">Soporte técnico integrado mediante el botón
+                                "Pedir Ayuda" en la app.</span></li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="border-t border-gray-200 dark:border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-gray-400 dark:text-gray-600">
+                    © 2023 DroidXMRMiner. No afiliado con el Proyecto Monero oficial.
+                </p>
+                <div class="flex gap-4">
+                    <a class="text-gray-400 hover:text-primary transition-colors"
+                        href="https://github.com/droidxmrminer">
+                        <span class="sr-only">GitHub</span>
+                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path clip-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                fill-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- External Scripts -->
+    <script src="js/i18n.js"></script>
+    <script src="js/main.js"></script>
+
 </body>
+
 </html>
