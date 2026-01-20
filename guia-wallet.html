@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Quick Start - DroidXMRMiner</title>
+    <meta
+        content="Guía rápida para empezar a minar Monero con DroidXMRMiner. Crea tu wallet y configura la app en 10 minutos."
+        name="description" data-i18n="meta_desc" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#5E42A6",
+                        "primary-hover": "#4A328C",
+                        "background-light": "#F3F4F6",
+                        "background-dark": "#312450",
+                        "surface-light": "#FFFFFF",
+                        "surface-dark": "#3C2F59",
+                        "surface-darker": "#261D3D",
+                        "accent-dark": "#4A328C",
+                        secondary: "#03DAC6",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                        mono: ["JetBrains Mono", "monospace"],
+                    },
+                    borderRadius: {
+                        DEFAULT: "0.5rem",
+                        'xl': '1rem',
+                        '2xl': '1.5rem',
+                    },
+                },
+            },
+        };
+    </script>
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+        .step-number {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 9999px;
+            background-color: #5E42A6;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.125rem;
+            flex-shrink: 0;
+        }
+
+        .step-card {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        .dark .step-card {
+            background-color: #3C2F59;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .warning-box {
+            background-color: #fefce8;
+            border: 1px solid #fef08a;
+            border-radius: 0.75rem;
+            padding: 1rem;
+        }
+
+        .dark .warning-box {
+            background-color: rgba(234, 179, 8, 0.1);
+            border-color: rgba(161, 98, 7, 0.3);
+        }
+
+        .success-box {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 0.75rem;
+            padding: 1rem;
+        }
+
+        .dark .success-box {
+            background-color: rgba(34, 197, 94, 0.1);
+            border-color: rgba(21, 128, 61, 0.3);
+        }
+
+        .info-box {
+            background-color: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 0.75rem;
+            padding: 1rem;
+        }
+
+        .dark .info-box {
+            background-color: rgba(59, 130, 246, 0.1);
+            border-color: rgba(29, 78, 216, 0.3);
+        }
+
+        .code-block {
+            background-color: #111827;
+            color: #4ade80;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            overflow-x: auto;
+        }
+    </style>
+
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-gray-900 dark:text-gray-100 font-sans transition-colors duration-300 antialiased selection:bg-primary selection:text-white">
+    <!-- Navigation -->
+    <nav
+        class="fixed w-full z-50 top-0 transition-all duration-300 bg-surface-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-gray-200 dark:border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="flex-shrink-0 flex items-center gap-3 cursor-pointer">
+                    <img src="logo.webp" alt="DroidXMRMiner Logo"
+                        class="w-10 h-10 rounded-xl shadow-lg shadow-primary/20" />
+                    <span class="font-bold text-xl tracking-tight">Droid<span
+                            class="text-primary">XMR</span>Miner</span>
+                </a>
+                <div class="flex items-center gap-4">
+                    <a href="index.html"
+                        class="text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-primary transition-colors flex items-center gap-1"
+                        data-i18n="qs_cta_back">
+                        <span class="material-icons-round text-sm">arrow_back</span>
+                        Back to home
+                    </a>
+                    <!-- Language Selector -->
+                    <div class="relative" id="lang-selector">
+                        <button
+                            class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-white/10 transition-colors focus:outline-none flex items-center gap-1 text-sm font-medium"
+                            id="lang-toggle">
+                            <span id="current-lang-flag">🇬🇧</span>
+                            <span class="material-icons-round text-sm text-gray-500">expand_more</span>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-32 bg-white dark:bg-surface-dark rounded-lg shadow-xl border border-gray-200 dark:border-white/10 overflow-hidden hidden"
+                            id="lang-menu">
+                            <button
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-white/10 flex items-center gap-2"
+                                data-lang="en">
+                                🇬🇧 English
+                            </button>
+                            <button
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-white/10 flex items-center gap-2"
+                                data-lang="es">
+                                🇪🇸 Español
+                            </button>
+                            <button
+                                class="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-white/10 flex items-center gap-2"
+                                data-lang="fr">
+                                🇫🇷 Français
+                            </button>
+                        </div>
+                    </div>
+                    <button
+                        class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-white/10 transition-colors focus:outline-none"
+                        id="theme-toggle">
+                        <span class="material-icons-round dark:hidden text-gray-600">dark_mode</span>
+                        <span class="material-icons-round hidden dark:block text-yellow-400">light_mode</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative pt-28 pb-12 sm:pt-36 sm:pb-16 overflow-hidden">
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[400px] bg-primary/10 dark:bg-primary/5 blur-[120px] rounded-full pointer-events-none -z-10">
+        </div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/10 border border-secondary/20 text-secondary text-xs font-semibold uppercase tracking-wider mb-6">
+                <span class="material-icons-round text-sm">rocket_launch</span>
+                <span data-i18n="qs_badge">Quick Start</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl font-bold tracking-tight mb-6 leading-tight text-gray-900 dark:text-white">
+                <span data-i18n="qs_title">Start Mining</span> <span class="text-primary"
+                    data-i18n="qs_title_monero">Monero</span>
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600 dark:text-gray-400" data-i18n="qs_subtitle">
+                Set up your wallet and DroidXMRMiner in less than 10 minutes. Everything you need to get started.
+            </p>
+        </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+        <div class="step-card">
+            <h2 class="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+                <span class="material-icons-round text-primary">list</span>
+                <span data-i18n="qs_toc_title">What's in this guide</span>
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <a href="#que-necesitas"
+                    class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                    <span
+                        class="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">1</span>
+                    <span class="text-sm text-gray-700 dark:text-gray-300" data-i18n="qs_step1_title">What do you
+                        need?</span>
+                </a>
+                <a href="#instalar-cake"
+                    class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                    <span
+                        class="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">2</span>
+                    <span class="text-sm text-gray-700 dark:text-gray-300" data-i18n="qs_step2_title">Install Cake
+                        Wallet</span>
+                </a>
+                <a href="#crear-wallet"
+                    class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                    <span
+                        class="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">3</span>
+                    <span class="text-sm text-gray-700 dark:text-gray-300" data-i18n="qs_step3_title">Create your
+                        wallet</span>
+                </a>
+                <a href="#guardar-seed"
+                    class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                    <span
+                        class="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">4</span>
+                    <span class="text-sm text-gray-700 dark:text-gray-300" data-i18n="qs_step4_title">Save your seed
+                        phrase</span>
+                </a>
+                <a href="#obtener-direccion"
+                    class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                    <span
+                        class="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">5</span>
+                    <span class="text-sm text-gray-700 dark:text-gray-300" data-i18n="qs_step5_title">Get your
+                        address</span>
+                </a>
+                <a href="#configurar-app"
+                    class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                    <span
+                        class="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">6</span>
+                    <span class="text-sm text-gray-700 dark:text-gray-300" data-i18n="qs_step6_title">Configure
+                        DroidXMRMiner</span>
+                </a>
+                <a href="#verificar-pool"
+                    class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                    <span
+                        class="w-6 h-6 rounded-full bg-primary/10 text-primary text-xs flex items-center justify-center font-bold">7</span>
+                    <span class="text-sm text-gray-700 dark:text-gray-300" data-i18n="qs_step7_title">Verify on
+                        SupportXMR</span>
+                </a>
+                <a href="#errores-comunes"
+                    class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                    <span
+                        class="w-6 h-6 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 text-xs flex items-center justify-center font-bold">!</span>
+                    <span class="text-sm text-gray-700 dark:text-gray-300" data-i18n="qs_errors_title">Errors to
+                        avoid</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+
+        <!-- Section 1: What you need -->
+        <section id="que-necesitas" class="mb-12 scroll-mt-24">
+            <div class="flex items-start gap-4 mb-6">
+                <div class="step-number">1</div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white" data-i18n="qs_step1_title">What do you
+                        need?</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-1" data-i18n="qs_step1_desc">Requirements before
+                        starting</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <p class="text-gray-700 dark:text-gray-300 mb-6">
+                    <span data-i18n="qs_step1_intro">Para minar Monero con DroidXMRMiner necesitas una</span>
+                    <strong data-i18n="qs_step1_wallet_addr">dirección de wallet</strong>
+                    <span data-i18n="qs_step1_wallet_intro">donde recibir tus pagos. Esta dirección tiene 95 caracteres
+                        y empieza con</span>
+                    <code class="bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded text-primary font-mono">4</code> o
+                    <code class="bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded text-primary font-mono">8</code>.
+                </p>
+
+                <div class="info-box mb-6">
+                    <div class="flex gap-3">
+                        <span class="material-icons-round text-blue-600 dark:text-blue-400 flex-shrink-0">info</span>
+                        <div>
+                            <h4 class="font-semibold text-blue-800 dark:text-blue-400 mb-1"
+                                data-i18n="qs_step1_why_cake">Why Cake Wallet?</h4>
+                            <p class="text-sm text-blue-700 dark:text-blue-300" data-i18n="qs_step1_why_cake_desc">
+                                It's the easiest mobile option: open source, fast sync, intuitive interface. Everything
+                                on your phone alongside DroidXMRMiner.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="flex items-center gap-3 p-4 bg-gray-50 dark:bg-surface-darker rounded-xl">
+                        <span class="material-icons-round text-secondary">smartphone</span>
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                            data-i18n="qs_step1_phone">Android phone with DroidXMRMiner</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 bg-gray-50 dark:bg-surface-darker rounded-xl">
+                        <span class="material-icons-round text-secondary">edit</span>
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                            data-i18n="qs_step1_paper">Paper and pen for the seed</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 bg-gray-50 dark:bg-surface-darker rounded-xl">
+                        <span class="material-icons-round text-secondary">schedule</span>
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300" data-i18n="qs_step1_time">10
+                            minutes of your time</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 bg-gray-50 dark:bg-surface-darker rounded-xl">
+                        <span class="material-icons-round text-secondary">wifi</span>
+                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                            data-i18n="qs_step1_internet">Internet connection</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Install Cake Wallet -->
+        <section id="instalar-cake" class="mb-12 scroll-mt-24">
+            <div class="flex items-start gap-4 mb-6">
+                <div class="step-number">2</div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white" data-i18n="qs_step2_title">Install Cake
+                        Wallet</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-1" data-i18n="qs_step2_desc">Download from the
+                        official store</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <div class="warning-box mb-6">
+                    <div class="flex gap-3">
+                        <span
+                            class="material-icons-round text-yellow-600 dark:text-yellow-500 flex-shrink-0">warning</span>
+                        <div>
+                            <h4 class="font-semibold text-yellow-800 dark:text-yellow-400 mb-1">⚠️ <span
+                                    data-i18n="qs_step2_warning">Important</span></h4>
+                            <p class="text-sm text-yellow-700 dark:text-yellow-300">
+                                <span data-i18n="qs_step2_warning_text">Download</span> <strong
+                                    data-i18n="qs_step2_warning_only">only</strong> <span
+                                    data-i18n="qs_step2_warning_rest">from official sources. Never install from links in
+                                    emails, Telegram, or unknown websites.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                    <a href="https://play.google.com/store/apps/details?id=com.cakewallet.cake_wallet" target="_blank"
+                        class="flex items-center justify-center gap-3 p-4 bg-primary text-white rounded-xl font-semibold hover:bg-primary-hover transition-colors shadow-lg shadow-primary/20">
+                        <span class="material-icons-round">shop</span>
+                        Google Play Store
+                    </a>
+                    <a href="https://cakewallet.com" target="_blank"
+                        class="flex items-center justify-center gap-3 p-4 bg-gray-100 dark:bg-surface-darker text-gray-900 dark:text-white rounded-xl font-semibold hover:bg-gray-200 dark:hover:bg-accent-dark transition-colors border border-gray-200 dark:border-white/10">
+                        <span class="material-icons-round">language</span>
+                        cakewallet.com
+                    </a>
+                </div>
+
+                <p class="text-gray-600 dark:text-gray-400 text-sm" data-i18n="qs_step2_platforms">
+                    Cake Wallet is also available for iOS, macOS and Linux if you prefer to manage your wallet from
+                    another device.
+                </p>
+            </div>
+        </section>
+
+        <!-- Section 3: Create Wallet -->
+        <section id="crear-wallet" class="mb-12 scroll-mt-24">
+            <div class="flex items-start gap-4 mb-6">
+                <div class="step-number">3</div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white" data-i18n="qs_step3_title">Create your
+                        wallet</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-1" data-i18n="qs_step3_desc">Set up your new Monero
+                        wallet</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <ol class="space-y-4">
+                    <li class="flex gap-4">
+                        <span
+                            class="w-6 h-6 rounded-full bg-gray-100 dark:bg-surface-darker text-gray-600 dark:text-gray-400 flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
+                        <div>
+                            <p class="text-gray-700 dark:text-gray-300"><span data-i18n="qs_step3_s1">Open Cake Wallet
+                                    and tap</span> <strong data-i18n="qs_step3_s1_btn">"Create New Wallet"</strong></p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <span
+                            class="w-6 h-6 rounded-full bg-gray-100 dark:bg-surface-darker text-gray-600 dark:text-gray-400 flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
+                        <div>
+                            <p class="text-gray-700 dark:text-gray-300"><span data-i18n="qs_step3_s2">Select</span>
+                                <strong data-i18n="qs_step3_s2_xmr">"Monero (XMR)"</strong> <span
+                                    data-i18n="qs_step3_s2_rest">from the cryptocurrency list</span>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <span
+                            class="w-6 h-6 rounded-full bg-gray-100 dark:bg-surface-darker text-gray-600 dark:text-gray-400 flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
+                        <div>
+                            <p class="text-gray-700 dark:text-gray-300" data-i18n="qs_step3_s3">Give your wallet a name
+                                (just for your reference, e.g. "MyDroidMiner")</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <span
+                            class="w-6 h-6 rounded-full bg-gray-100 dark:bg-surface-darker text-gray-600 dark:text-gray-400 flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
+                        <div>
+                            <p class="text-gray-700 dark:text-gray-300"><span data-i18n="qs_step3_s4">Set up a</span>
+                                <strong data-i18n="qs_step3_s4_pin">6-digit PIN</strong> <span
+                                    data-i18n="qs_step3_s4_bio">or enable biometrics</span>
+                            </p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Section 4: Save Seed Phrase -->
+        <section id="guardar-seed" class="mb-12 scroll-mt-24">
+            <div class="flex items-start gap-4 mb-6">
+                <div class="step-number">4</div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white" data-i18n="qs_step4_title">Save your
+                        seed phrase</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-1" data-i18n="qs_step4_desc">The most critical step of
+                        the entire process</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <div class="warning-box mb-6">
+                    <div class="flex gap-3">
+                        <span
+                            class="material-icons-round text-yellow-600 dark:text-yellow-500 flex-shrink-0 text-2xl">priority_high</span>
+                        <div>
+                            <h4 class="font-bold text-yellow-800 dark:text-yellow-400 mb-2 text-lg">🚨 <span
+                                    data-i18n="qs_step4_critical">CRITICAL: Read this before continuing</span></h4>
+                            <p class="text-yellow-700 dark:text-yellow-300 mb-3">
+                                <span data-i18n="qs_step4_critical_text">The app will show you</span> <strong
+                                    data-i18n="qs_step4_critical_25">25 words in English</strong>. <span
+                                    data-i18n="qs_step4_critical_money">These words ARE your money</span>. <span
+                                    data-i18n="qs_step4_critical_lose">If you lose them, you lose access to your XMR
+                                    forever. If someone gets them, they can empty your wallet instantly.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="font-semibold text-gray-900 dark:text-white mb-4" data-i18n="qs_step4_todo">What you MUST do
+                    NOW:</h4>
+                <ol class="space-y-3 mb-6">
+                    <li class="flex gap-3 items-start">
+                        <span class="material-icons-round text-green-500 flex-shrink-0">check_circle</span>
+                        <span class="text-gray-700 dark:text-gray-300"><span data-i18n="qs_step4_t1">Get</span> <strong
+                                data-i18n="qs_step4_t1_paper">physical paper and pen</strong> <span
+                                data-i18n="qs_step4_t1_rest">(don't use your phone to photograph)</span></span>
+                    </li>
+                    <li class="flex gap-3 items-start">
+                        <span class="material-icons-round text-green-500 flex-shrink-0">check_circle</span>
+                        <span class="text-gray-700 dark:text-gray-300"><span data-i18n="qs_step4_t2">Write the 25
+                                words</span> <strong data-i18n="qs_step4_t2_order">in exact order</strong><span
+                                data-i18n="qs_step4_t2_rest">, numbering them 1 to 25</span></span>
+                    </li>
+                    <li class="flex gap-3 items-start">
+                        <span class="material-icons-round text-green-500 flex-shrink-0">check_circle</span>
+                        <span class="text-gray-700 dark:text-gray-300"><span data-i18n="qs_step4_t3">Verify</span>
+                            <strong data-i18n="qs_step4_t3_spell">spelling and order</strong><span
+                                data-i18n="qs_step4_t3_rest"> — they must be perfect</span></span>
+                    </li>
+                    <li class="flex gap-3 items-start">
+                        <span class="material-icons-round text-green-500 flex-shrink-0">check_circle</span>
+                        <span class="text-gray-700 dark:text-gray-300"><span data-i18n="qs_step4_t4">Store the paper in
+                                a</span> <strong data-i18n="qs_step4_t4_safe">safe place</strong> <span
+                                data-i18n="qs_step4_t4_rest">(safe deposit box, bank)</span></span>
+                    </li>
+                    <li class="flex gap-3 items-start">
+                        <span class="material-icons-round text-green-500 flex-shrink-0">check_circle</span>
+                        <span class="text-gray-700 dark:text-gray-300"><span data-i18n="qs_step4_t5">Consider making
+                                a</span> <strong data-i18n="qs_step4_t5_second">second copy</strong> <span
+                                data-i18n="qs_step4_t5_rest">in a different location</span></span>
+                    </li>
+                </ol>
+
+                <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700/30 rounded-xl p-4">
+                    <h4 class="font-semibold text-red-800 dark:text-red-400 mb-3">❌ <span
+                            data-i18n="qs_step4_never">NEVER store your seed in:</span></h4>
+                    <div class="grid grid-cols-2 gap-2 text-sm text-red-700 dark:text-red-300">
+                        <span class="flex items-center gap-2"><span class="material-icons-round text-sm">close</span>
+                            <span data-i18n="qs_step4_n1">Phone photos</span></span>
+                        <span class="flex items-center gap-2"><span class="material-icons-round text-sm">close</span>
+                            <span data-i18n="qs_step4_n2">Phone notes</span></span>
+                        <span class="flex items-center gap-2"><span class="material-icons-round text-sm">close</span>
+                            <span data-i18n="qs_step4_n3">Text files</span></span>
+                        <span class="flex items-center gap-2"><span class="material-icons-round text-sm">close</span>
+                            <span data-i18n="qs_step4_n4">Email or messages</span></span>
+                        <span class="flex items-center gap-2"><span class="material-icons-round text-sm">close</span>
+                            <span data-i18n="qs_step4_n5">Cloud (Google Drive, iCloud)</span></span>
+                        <span class="flex items-center gap-2"><span class="material-icons-round text-sm">close</span>
+                            <span data-i18n="qs_step4_n6">Password managers</span></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Get Address -->
+        <section id="obtener-direccion" class="mb-12 scroll-mt-24">
+            <div class="flex items-start gap-4 mb-6">
+                <div class="step-number">5</div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white" data-i18n="qs_step5_title">Get your
+                        address</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-1" data-i18n="qs_step5_desc">The address you'll use
+                        for mining</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <ol class="space-y-4 mb-6">
+                    <li class="flex gap-4">
+                        <span
+                            class="w-6 h-6 rounded-full bg-gray-100 dark:bg-surface-darker text-gray-600 dark:text-gray-400 flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span data-i18n="qs_step5_s1">En el dashboard principal de Cake Wallet, toca</span>
+                            <strong data-i18n="qs_step5_s1_btn">"Receive"</strong>
+                        </p>
+                    </li>
+                    <li class="flex gap-4">
+                        <span
+                            class="w-6 h-6 rounded-full bg-gray-100 dark:bg-surface-darker text-gray-600 dark:text-gray-400 flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span data-i18n="qs_step5_s2">Verás tu</span>
+                            <strong data-i18n="qs_step5_s2_addr">Primary Address</strong>
+                            <span data-i18n="qs_step5_s2_rest">de 95 caracteres que empieza con</span>
+                            <code
+                                class="bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded text-primary font-mono">4</code>
+                        </p>
+                    </li>
+                    <li class="flex gap-4">
+                        <span
+                            class="w-6 h-6 rounded-full bg-gray-100 dark:bg-surface-darker text-gray-600 dark:text-gray-400 flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            <span data-i18n="qs_step5_s3">Toca el</span>
+                            <strong data-i18n="qs_step5_s3_copy">icono de copiar</strong>
+                            <span data-i18n="qs_step5_s3_rest">para copiar la dirección al portapapeles</span>
+                        </p>
+                    </li>
+                </ol>
+
+                <div class="info-box mb-6">
+                    <h4 class="font-semibold text-blue-800 dark:text-blue-400 mb-2" data-i18n="qs_step5_example">Example
+                        of a valid address:</h4>
+                    <div class="code-block text-xs break-all">
+                        4AdUndXHHZ6cfufTMvppY6JwXNouMBzSkbLYfpAV5Usx3skxNgYeYTRj5UzqtReoS44qo9mtmXCqY45DJ852K5Jv2684Rge
+                    </div>
+                    <p class="text-xs text-blue-600 dark:text-blue-400 mt-2 italic" data-i18n="qs_step5_example_note">
+                        (Don't use this address, it's just an illustrative example)
+                    </p>
+                </div>
+
+                <div class="success-box">
+                    <div class="flex gap-3">
+                        <span
+                            class="material-icons-round text-green-600 dark:text-green-500 flex-shrink-0">tips_and_updates</span>
+                        <div>
+                            <h4 class="font-semibold text-green-800 dark:text-green-400 mb-1"
+                                data-i18n="qs_step5_valid">Valid addresses for SupportXMR</h4>
+                            <p class="text-sm text-green-700 dark:text-green-300">
+                                <span data-i18n="qs_step5_valid_text">You can use both the</span> <strong
+                                    data-i18n="qs_step5_valid_primary">Primary Address</strong> <span>(starts with
+                                    4)</span> <span data-i18n="qs_step5_valid_sub">or a Subaddress</span> <span>(starts
+                                    with 8)</span>. <span data-i18n="qs_step5_valid_rest">Both work perfectly with
+                                    SupportXMR.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Configure App -->
+        <section id="configurar-app" class="mb-12 scroll-mt-24">
+            <div class="flex items-start gap-4 mb-6">
+                <div class="step-number">6</div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white" data-i18n="qs_step6_title">Configure
+                        DroidXMRMiner</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-1" data-i18n="qs_step6_desc">Connect your wallet with
+                        the mining pool</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <div class="info-box mb-6">
+                    <div class="flex gap-3">
+                        <span class="material-icons-round text-blue-600 dark:text-blue-400 flex-shrink-0">info</span>
+                        <div>
+                            <h4 class="font-semibold text-blue-800 dark:text-blue-400 mb-1" data-i18n="qs_step6_why">Why
+                                SupportXMR?</h4>
+                            <p class="text-sm text-blue-700 dark:text-blue-300">
+                                <span data-i18n="qs_step6_why_text">We use SupportXMR as</span> <strong
+                                    data-i18n="qs_step6_why_example">an example for its ease of use</strong>. <span
+                                    data-i18n="qs_step6_why_rest">You're free to explore and choose the pool you prefer
+                                    — the app includes several predefined pools and also allows custom
+                                    configuration.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="font-semibold text-gray-900 dark:text-white mb-4" data-i18n="qs_step6_config">In
+                    DroidXMRMiner, go to Settings:</h4>
+
+                <ol class="space-y-4 mb-6">
+                    <li class="flex gap-4">
+                        <span
+                            class="w-6 h-6 rounded-full bg-gray-100 dark:bg-surface-darker text-gray-600 dark:text-gray-400 flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
+                        <div>
+                            <p class="text-gray-700 dark:text-gray-300"><span data-i18n="qs_step6_s1">In the</span>
+                                <strong data-i18n="qs_step6_s1_pool">Pool selector</strong><span
+                                    data-i18n="qs_step6_s1_choose">, choose</span>
+                                <code
+                                    class="bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded text-primary font-mono text-sm">pool.supportxmr.com:443</code>
+                            </p>
+                            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1" data-i18n="qs_step6_s1_tls">TLS/SSL
+                                is automatically enabled when selecting port 443</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <span
+                            class="w-6 h-6 rounded-full bg-gray-100 dark:bg-surface-darker text-gray-600 dark:text-gray-400 flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
+                        <p class="text-gray-700 dark:text-gray-300"><strong data-i18n="qs_step6_s2">Paste your wallet
+                                address</strong> <span data-i18n="qs_step6_s2_chars">(95 characters) in the
+                                corresponding field</span></p>
+                    </li>
+                    <li class="flex gap-4">
+                        <span
+                            class="w-6 h-6 rounded-full bg-gray-100 dark:bg-surface-darker text-gray-600 dark:text-gray-400 flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
+                        <p class="text-gray-700 dark:text-gray-300"><span data-i18n="qs_step6_s3">Press</span> <strong
+                                data-i18n="qs_step6_s3_save">Save</strong> <span data-i18n="qs_step6_s3_rest">to confirm
+                                the configuration</span></p>
+                    </li>
+                </ol>
+
+                <div class="success-box">
+                    <div class="flex gap-3">
+                        <span
+                            class="material-icons-round text-green-600 dark:text-green-500 flex-shrink-0">play_circle</span>
+                        <div>
+                            <h4 class="font-semibold text-green-800 dark:text-green-400 mb-1"
+                                data-i18n="qs_step6_ready">Ready to mine!</h4>
+                            <p class="text-sm text-green-700 dark:text-green-300">
+                                <span data-i18n="qs_step6_ready_text">Go back to the main screen and press</span>
+                                <strong data-i18n="qs_step6_ready_start">Start Mining</strong>. <span
+                                    data-i18n="qs_step6_ready_rest">The app will connect to the pool and you'll see the
+                                    first stats in a few seconds.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Verify on Pool -->
+        <section id="verificar-pool" class="mb-12 scroll-mt-24">
+            <div class="flex items-start gap-4 mb-6">
+                <div class="step-number">7</div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white" data-i18n="qs_step7_title">Verify on
+                        SupportXMR</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-1" data-i18n="qs_step7_desc">Confirm everything is
+                        working correctly</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <ol class="space-y-4 mb-6">
+                    <li class="flex gap-4">
+                        <span
+                            class="w-6 h-6 rounded-full bg-gray-100 dark:bg-surface-darker text-gray-600 dark:text-gray-400 flex items-center justify-center text-sm font-bold flex-shrink-0">1</span>
+                        <p class="text-gray-700 dark:text-gray-300"><span data-i18n="qs_step7_s1">Wait</span>
+                            <strong>2-3 <span data-i18n="qs_step7_s1_min">minutes</span></strong> <span
+                                data-i18n="qs_step7_s1_rest">after starting mining</span>
+                        </p>
+                    </li>
+                    <li class="flex gap-4">
+                        <span
+                            class="w-6 h-6 rounded-full bg-gray-100 dark:bg-surface-darker text-gray-600 dark:text-gray-400 flex items-center justify-center text-sm font-bold flex-shrink-0">2</span>
+                        <p class="text-gray-700 dark:text-gray-300"><span data-i18n="qs_step7_s2">Open your browser and
+                                go to</span> <a href="https://supportxmr.com" target="_blank"
+                                class="text-primary hover:underline font-medium">supportxmr.com</a></p>
+                    </li>
+                    <li class="flex gap-4">
+                        <span
+                            class="w-6 h-6 rounded-full bg-gray-100 dark:bg-surface-darker text-gray-600 dark:text-gray-400 flex items-center justify-center text-sm font-bold flex-shrink-0">3</span>
+                        <p class="text-gray-700 dark:text-gray-300"><strong data-i18n="qs_step7_s3">Paste your wallet
+                                address</strong> <span data-i18n="qs_step7_s3_rest">in the search field</span></p>
+                    </li>
+                    <li class="flex gap-4">
+                        <span
+                            class="w-6 h-6 rounded-full bg-gray-100 dark:bg-surface-darker text-gray-600 dark:text-gray-400 flex items-center justify-center text-sm font-bold flex-shrink-0">4</span>
+                        <p class="text-gray-700 dark:text-gray-300"><span data-i18n="qs_step7_s4">You'll see the
+                                dashboard with your stats:</span>
+                            <strong data-i18n="qs_step7_s4_stats">hashrate, shares, pending balance</strong>
+                        </p>
+                    </li>
+                </ol>
+
+                <a href="https://supportxmr.com" target="_blank"
+                    class="flex items-center justify-center gap-3 w-full p-4 bg-primary text-white rounded-xl font-semibold hover:bg-primary-hover transition-colors shadow-lg shadow-primary/20">
+                    <span class="material-icons-round">launch</span>
+                    <span data-i18n="qs_step7_btn">Go to SupportXMR Dashboard</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Section: Common Errors -->
+        <section id="errores-comunes" class="mb-12 scroll-mt-24">
+            <div class="flex items-start gap-4 mb-6">
+                <div
+                    class="w-10 h-10 rounded-full bg-yellow-500 text-white flex items-center justify-center font-bold text-lg flex-shrink-0">
+                    <span class="material-icons-round">warning</span>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white" data-i18n="qs_errors_title">Errors you
+                        MUST avoid</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mt-1" data-i18n="qs_errors_desc">Learn from the most
+                        common mistakes</p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <!-- Error 1 -->
+                <div class="step-card border-l-4 border-red-500">
+                    <h4 class="font-bold text-red-600 dark:text-red-400 mb-2 flex items-center gap-2">
+                        <span class="material-icons-round">dangerous</span>
+                        <span data-i18n="qs_err1_title">Minar a un exchange (Binance, Kraken, etc.)</span>
+                    </h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm mb-3">
+                        <strong data-i18n="qs_err1_text">No uses direcciones de exchanges.</strong>
+                        <span data-i18n="qs_err1_reason">Pueden cambiar tu dirección sin aviso, el mínimo de depósito
+                            puede ser mayor que tus pagos, y durante mantenimiento los depósitos pueden perderse.</span>
+                    </p>
+                    <div class="success-box">
+                        <p class="text-sm text-green-700 dark:text-green-300">
+                            <strong data-i18n="qs_err1_solution">✓ Solución:</strong>
+                            <span data-i18n="qs_err1_solution_text">Mina siempre a tu wallet personal (Cake Wallet),
+                                luego transfiere al exchange cuando quieras vender.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Error 2 -->
+                <div class="step-card border-l-4 border-red-500">
+                    <h4 class="font-bold text-red-600 dark:text-red-400 mb-2 flex items-center gap-2">
+                        <span class="material-icons-round">dangerous</span>
+                        <span data-i18n="qs_err2_title">No hacer backup de la seed ANTES de minar</span>
+                    </h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm mb-3">
+                        <span data-i18n="qs_err2_text">Escenario típico: Usuario crea wallet, empieza a minar
+                            entusiasmado, "después anoto la seed". El teléfono se daña.</span>
+                        <strong data-i18n="qs_err2_lost">Todos los XMR minados se pierden para siempre.</strong>
+                    </p>
+                    <div class="success-box">
+                        <p class="text-sm text-green-700 dark:text-green-300">
+                            <strong data-i18n="qs_err2_solution">✓ Regla inquebrantable:</strong>
+                            <span data-i18n="qs_err2_solution_text">Anota tu seed ANTES de configurar el minero.</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Error 3 -->
+                <div class="step-card border-l-4 border-yellow-500">
+                    <h4 class="font-bold text-yellow-600 dark:text-yellow-400 mb-2 flex items-center gap-2">
+                        <span class="material-icons-round">warning</span>
+                        <span data-i18n="qs_err3_title">Confundir redes (mainnet vs testnet)</span>
+                    </h4>
+                    <p class="text-gray-700 dark:text-gray-300 text-sm mb-4" data-i18n="qs_err3_text">
+                        Verifica que tu dirección esté en la red correcta:
+                    </p>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-gray-200 dark:border-gray-700">
+                                    <th class="text-left py-2 pr-4 font-medium text-gray-600 dark:text-gray-400"
+                                        data-i18n="qs_err3_starts">Empieza
+                                        con</th>
+                                    <th class="text-left py-2 pr-4 font-medium text-gray-600 dark:text-gray-400"
+                                        data-i18n="qs_err3_network">Red
+                                    </th>
+                                    <th class="text-left py-2 font-medium text-gray-600 dark:text-gray-400"
+                                        data-i18n="qs_err3_real">XMR Real
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b border-gray-100 dark:border-gray-800">
+                                    <td class="py-2 pr-4 font-mono text-primary">4 o 8</td>
+                                    <td class="py-2 pr-4 text-green-600 dark:text-green-400 font-medium"
+                                        data-i18n="qs_err3_mainnet">Mainnet ✓</td>
+                                    <td class="py-2 text-green-600 dark:text-green-400" data-i18n="qs_err3_yes">Sí</td>
+                                </tr>
+                                <tr class="border-b border-gray-100 dark:border-gray-800">
+                                    <td class="py-2 pr-4 font-mono text-gray-500">5 o 7</td>
+                                    <td class="py-2 pr-4 text-gray-500" data-i18n="qs_err3_stagenet">Stagenet</td>
+                                    <td class="py-2 text-red-500" data-i18n="qs_err3_no">No</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2 pr-4 font-mono text-gray-500">9 o B</td>
+                                    <td class="py-2 pr-4 text-gray-500" data-i18n="qs_err3_testnet">Testnet</td>
+                                    <td class="py-2 text-red-500" data-i18n="qs_err3_no">No</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- CTA Section -->
+        <div class="text-center">
+            <div class="inline-flex flex-col sm:flex-row gap-4">
+                <a href="https://play.google.com/store/apps/details?id=es.chichicha.minador"
+                    class="flex items-center justify-center gap-3 px-8 py-4 bg-primary text-white rounded-xl font-semibold text-lg transition-transform hover:scale-105 shadow-xl shadow-primary/20">
+                    <span class="material-icons-round">shop</span>
+                    <span data-i18n="qs_cta_download">Download DroidXMRMiner</span>
+                </a>
+                <a href="index.html"
+                    class="flex items-center justify-center gap-3 px-8 py-4 bg-white dark:bg-surface-dark border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white rounded-xl font-semibold text-lg transition-all hover:bg-gray-50 dark:hover:bg-accent-dark">
+                    <span class="material-icons-round">arrow_back</span>
+                    <span data-i18n="qs_cta_back">Back to home</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-surface-darker border-t border-gray-200 dark:border-white/5 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <img src="logo.webp" alt="DroidXMRMiner Logo"
+                        class="w-6 h-6 rounded-lg shadow-lg shadow-primary/20" />
+                    <span class="font-bold text-sm text-gray-900 dark:text-white">DroidXMRMiner</span>
+                </div>
+                <p class="text-xs text-gray-400 dark:text-gray-600" data-i18n="footer_copyright">
+                    © 2023 DroidXMRMiner. No afiliado con el Proyecto Monero oficial.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/i18n.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme toggle
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
+
+            if (localStorage.getItem('theme') === 'dark' ||
+                (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                htmlElement.classList.add('dark');
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                htmlElement.classList.toggle('dark');
+                localStorage.setItem('theme', htmlElement.classList.contains('dark') ? 'dark' : 'light');
+            });
+
+            // Language selector
+            const langToggle = document.getElementById('lang-toggle');
+            const langMenu = document.getElementById('lang-menu');
+
+            if (langToggle && langMenu) {
+                langToggle.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    langMenu.classList.toggle('hidden');
+                });
+
+                document.addEventListener('click', () => {
+                    langMenu.classList.add('hidden');
+                });
+
+                langMenu.querySelectorAll('[data-lang]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        window.i18n.setLanguage(btn.dataset.lang);
+                    });
+                });
+            }
+
+            // Initialize i18n
+            if (window.i18n) {
+                const lang = window.i18n.detectLanguage();
+                window.i18n.applyTranslations(lang);
+            }
+
+            // Smooth scroll
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#') {
+                        e.preventDefault();
+                        const target = document.querySelector(href);
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

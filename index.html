@@ -71,6 +71,11 @@
                             href="#performance" data-i18n="nav_performance">Performance</a>
                         <a class="hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium"
                             href="#faq" data-i18n="nav_faq">FAQ</a>
+                        <a class="bg-secondary/10 text-secondary hover:bg-secondary/20 transition-colors px-3 py-2 rounded-md text-sm font-semibold flex items-center gap-1"
+                            href="guia-wallet.html" data-i18n="nav_quickstart">
+                            <span class="material-icons-round text-sm">rocket_launch</span>
+                            Quick Start
+                        </a>
                         <a class="hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium flex items-center gap-1"
                             href="https://github.com/monero-project/monero" target="_blank">
                             GitHub <span class="material-icons-round text-xs">open_in_new</span>
@@ -283,10 +288,16 @@
                                 </div>
                             </div>
                             <div class="p-4 bg-gray-50 dark:bg-surface-darker rounded-xl">
-                                <div class="flex items-center gap-3">
-                                    <span class="material-icons-round text-secondary">wallet</span>
-                                    <span class="text-sm font-medium text-gray-700 dark:text-gray-300"
-                                        data-i18n="req_wallet">A Monero (XMR) wallet</span>
+                                <div class="flex items-center justify-between gap-3">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-icons-round text-secondary">wallet</span>
+                                        <span class="text-sm font-medium text-gray-700 dark:text-gray-300"
+                                            data-i18n="req_wallet">A Monero (XMR) wallet</span>
+                                    </div>
+                                    <a href="guia-wallet.html"
+                                        class="text-xs text-secondary hover:underline font-semibold flex items-center gap-1">
+                                        Quick Start <span class="material-icons-round text-xs">arrow_forward</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -615,18 +626,23 @@
                 <div>
                     <h4 class="font-semibold text-gray-900 dark:text-white mb-4">Recursos</h4>
                     <ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
-                        <li><a class="hover:text-primary transition-colors" href="#">Documentación</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Tutorial de Minería</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Lista de Pools</a></li>
+                        <li><a class="hover:text-primary transition-colors flex items-center gap-1 font-medium text-secondary"
+                                href="guia-wallet.html">
+                                <span class="material-icons-round text-xs">rocket_launch</span>
+                                Quick Start
+                            </a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#faq">Preguntas Frecuentes</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="https://supportxmr.com"
+                                target="_blank">SupportXMR Dashboard</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-semibold text-gray-900 dark:text-white mb-4">Comunidad y Soporte</h4>
                     <ul class="space-y-2 text-sm text-gray-500 dark:text-gray-400">
                         <li><a class="hover:text-primary transition-colors"
-                                href="https://github.com/droidxmrminer">GitHub
-                                @pablotoledo</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#">Guía de Inicio</a></li>
+                                href="https://github.com/droidxmrminer">GitHub</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="guia-wallet.html">Quick Start</a>
+                        </li>
                         <li><span class="text-xs italic text-gray-400">Soporte técnico integrado mediante el botón
                                 "Pedir Ayuda" en la app.</span></li>
                     </ul>
