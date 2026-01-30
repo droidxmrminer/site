@@ -13,11 +13,11 @@ const translations = {
         // Meta
         meta_desc: "Quick guide to start mining Monero with DroidXMRMiner. Create your wallet and configure the app in 10 minutes.",
         // Hero
-        hero_badge: "v1.6.3 Stable Release",
+        hero_badge: "v1.7.0 Stable Release",
         hero_title_suffix: "Native Monero Mining",
         hero_subtitle: "The most advanced technical tool for XMR enthusiasts on Android. Optimized performance, total privacy and Android 15 compatible.",
         hero_cta_play: "Google Play",
-        hero_cta_github: "View on GitHub",
+        hero_cta_github: "Download APK",
         // Features highlight
         feat_native: "Native XMRig Engine",
         feat_native_desc: "Optimized ARM64 binary",
@@ -235,11 +235,11 @@ const translations = {
         nav_faq: "FAQ",
         nav_download: "Descargar App",
         // Hero
-        hero_badge: "v1.6.3 Versión Estable",
+        hero_badge: "v1.7.0 Versión Estable",
         hero_title_suffix: "Minería Monero Nativa",
         hero_subtitle: "La herramienta técnica más avanzada para entusiastas de XMR en Android. Rendimiento optimizado, privacidad total y compatible con Android 15.",
         hero_cta_play: "Google Play",
-        hero_cta_github: "Ver en GitHub",
+        hero_cta_github: "Descargar APK",
         // Meta
         meta_desc: "Guía rápida para empezar a minar Monero con DroidXMRMiner. Crea tu wallet y configura la app en 10 minutos.",
         // Features highlight
@@ -461,11 +461,11 @@ const translations = {
         // Meta
         meta_desc: "Guide rapide pour commencer à miner du Monero avec DroidXMRMiner. Créez votre portefeuille et configurez l'application en 10 minutes.",
         // Hero
-        hero_badge: "v1.6.3 Version Stable",
+        hero_badge: "v1.7.0 Version Stable",
         hero_title_suffix: "Minage Monero Natif",
         hero_subtitle: "L'outil technique le plus avancé pour les passionnés de XMR sur Android. Performance optimisée, confidentialité totale et compatible Android 15.",
         hero_cta_play: "Google Play",
-        hero_cta_github: "Voir sur GitHub",
+        hero_cta_github: "Télécharger APK",
         // Features highlight
         feat_native: "Moteur XMRig Natif",
         feat_native_desc: "Binaire ARM64 optimisé",
