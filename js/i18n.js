@@ -73,7 +73,7 @@ const translations = {
         download_title: "Ready to start mining?",
         download_subtitle: "Join the Monero network with the most efficient tool for Android. Download DroidXMRMiner now.",
         download_play: "Download on Google Play",
-        download_github: "GitHub Releases",
+        download_github: "Download APK",
         // Footer
         footer_product: "Product",
         footer_features: "Features",
@@ -297,7 +297,7 @@ const translations = {
         download_title: "¿Listo para empezar a minar?",
         download_subtitle: "Únete a la red Monero con la herramienta más eficiente para Android. Descarga DroidXMRMiner ahora.",
         download_play: "Descargar en Google Play",
-        download_github: "GitHub Releases",
+        download_github: "Descargar APK",
         // Footer
         footer_product: "Producto",
         footer_features: "Características",
@@ -521,7 +521,7 @@ const translations = {
         download_title: "Prêt à commencer le minage ?",
         download_subtitle: "Rejoignez le réseau Monero avec l'outil le plus efficace pour Android. Téléchargez DroidXMRMiner maintenant.",
         download_play: "Télécharger sur Google Play",
-        download_github: "GitHub Releases",
+        download_github: "Télécharger APK",
         // Footer
         footer_product: "Produit",
         footer_features: "Fonctionnalités",
